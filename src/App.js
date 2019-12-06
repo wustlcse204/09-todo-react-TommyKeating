@@ -138,14 +138,53 @@ mComp(event)
       };
 
       xhttp2.open("PUT", "https://cse204.work/todos/"+id, true);
-
       xhttp2.setRequestHeader("Content-type", "application/json");
       xhttp2.setRequestHeader("x-api-key", "2fbbcb-57aec6-e1ae6c-941610-845583");
       xhttp2.send(JSON.stringify(data));
-      const todo = this.state.todos;
-      self.setState({
-        todos: todo
-    })
+//////////////////////////////////////////////////////////////////////////////////
+      var xhttp1 = new XMLHttpRequest();
+
+      xhttp1.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            var todos1 = JSON.parse(this.responseText);
+            self.setState({todos: todos1});
+            console.log(todos1);
+        }
+      };
+
+      xhttp1.open("GET", "https://cse204.work/todos", true);
+      xhttp1.setRequestHeader("x-api-key","2fbbcb-57aec6-e1ae6c-941610-845583");
+      xhttp1.send();
+
+      var xhttp2 = new XMLHttpRequest();
+
+      xhttp2.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            var todos1 = JSON.parse(this.responseText);
+            self.setState({todos: todos1});
+            console.log(todos1);
+        }
+      };
+
+      xhttp2.open("GET", "https://cse204.work/todos", true);
+      xhttp2.setRequestHeader("x-api-key","2fbbcb-57aec6-e1ae6c-941610-845583");
+      xhttp2.send();
+
+      var xhttp3 = new XMLHttpRequest();
+
+      xhttp3.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            var todos1 = JSON.parse(this.responseText);
+            self.setState({todos: todos1});
+            console.log(todos1);
+        }
+      };
+
+      xhttp3.open("GET", "https://cse204.work/todos", true);
+      xhttp3.setRequestHeader("x-api-key","2fbbcb-57aec6-e1ae6c-941610-845583");
+      xhttp3.send();
+
+      this.sorter();
 }
 
 deleteTo(event)
@@ -188,6 +227,7 @@ deleteTo(event)
           self.setState({
             todos: remainingTodos
         })
+        //this.sorter();
 }
 
   render() {
